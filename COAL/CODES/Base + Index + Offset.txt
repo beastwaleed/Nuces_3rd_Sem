@@ -1,0 +1,11 @@
+org 0x0100
+
+mov bx, num5    ; BX points to the base address of num5
+mov si, 4       ; SI is set to an offset of 4
+mov ax, BCDEh   ; Move the value BCDEh into AX
+mov [bx+si+6], ax  ; Store AX (BCDEh) at num5+4+6
+
+mov ax, 0x4c00
+int 0x21
+
+num5: dw 0, 0, 0, 0, 0, 0   ; Reserve six words for num5

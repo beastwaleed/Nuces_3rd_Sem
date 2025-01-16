@@ -1,0 +1,19 @@
+org 0x0100
+
+mov ax,0
+mov bx,0
+
+loop1:
+add ax, [num1+bx]
+add bx,2
+
+cmp bx,6 ;compare the value of bx & 6 because for the last value(15) bx will become 6 after adding up 3 times
+jnz loop1 ;j if bx and 6 are not equal
+
+mov [result],ax
+
+mov ax, 0x4c00
+int 0x21
+
+num1: dw 5,10,15
+result: dw 0

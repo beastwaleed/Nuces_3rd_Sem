@@ -1,0 +1,50 @@
+org 0x0100
+
+jmp start
+
+data: dw 5,10,8,6,11,20
+greater: dw 0
+less: dw 0
+
+start:
+mov cx,0
+mov bx,0
+
+	l1:
+		mov ax,[data+bx]
+		cmp ax, 12
+		jl counter
+
+		add bx,2
+		cmp bx,10
+		jne l1
+			
+counter:
+add cx,1
+add bx,2
+cmp bx,10
+jne l1
+
+cmp cx,0
+jne l2
+mov bx,0
+
+l3:
+mov ax,[data+bx]
+add [less],ax
+add bx,2
+cmp bx,10
+jne l2
+
+
+mov bx,0
+
+l2:
+mov ax,[data+bx]
+add [greater],ax
+add bx,2
+cmp bx,10
+jne l2
+
+mov ax, 0x4c00
+int 0x21

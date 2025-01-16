@@ -1,0 +1,27 @@
+org 0x0100
+
+jmp start
+multiplicand: db 13 	; 4 bit multiplicand (8 Bit space)
+multiplier: db 5 	;4 bit multiplicand 
+result: db 0
+
+start:
+
+mov cl,4  		; initialize bit count to four 
+mov bl, [multiplicand] 	;load multiplicand in bl
+mov dl, [multiplier] 	;load multiplier in dl 
+
+checkbit:
+shr dl,1 		;move right most bit in carry 
+jnc skip		;skip addition if bit is zero
+
+add [result],bl		;add result in bl
+
+skip:
+shl bl,1 		;shift multiplicand left
+dec cl			;decrement
+jnz checkbit		;repeat if not zero
+
+mov ax, 0x4c00
+int 0x21
+

@@ -1,0 +1,10 @@
+org 0x0100
+
+mov si, num3    ; SI points to the base address of num3
+mov ax, 789Ah   ; Move the value 789Ah into AX
+mov [si+4], ax  ; Store AX (789Ah) at num3+4 (offset by 4)
+
+mov ax, 0x4c00
+int 0x21
+
+num3: dw 0, 0, 0, 0   ; Reserve four words for num3

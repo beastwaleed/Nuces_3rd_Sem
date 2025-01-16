@@ -1,0 +1,41 @@
+;Find Max & Min Without using Sorting
+
+org 0x0100
+
+jmp start
+array: dw 8,2,3,7,5,6,7,1,9,10		;original array
+max: dw 0
+min: dw 0
+
+start:
+mov bx,0
+mov cx,10
+mov ax,[array+bx]
+mov [max],ax
+mov [min],ax
+add bx,2
+
+loop1:
+mov ax, [array+bx]
+add bx,2
+dec cx
+cmp cx,0
+je exit
+
+cmp ax, [max]
+ja maximum
+
+cmp ax, [min]
+jb minimum
+
+maximum:
+mov [max], ax
+jmp loop1
+
+minimum:
+mov [min],ax
+jmp loop1
+
+exit:
+mov ax, 0x4c00                      ; terminate program
+int 0x21

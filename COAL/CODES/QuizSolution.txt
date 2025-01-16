@@ -1,0 +1,46 @@
+org 0x0100
+
+jmp start
+array: dw 7,3,8,11,2,14,6,13,10,7  ; original array
+size: dw 10                         ; size of the array
+newArr: dw 0,0,0,0,0,0,0,0,0,0      ; empty array for partitioning
+
+start:
+mov bx, 0                           ; initialize index for the original array
+mov cx, [size]                      ; load the size of the array
+mov di, 0                           ; index for the beginning of newArr (for values < 10)
+mov si, 18                          ; index for the end of newArr (for values >= 10)
+
+l1:
+mov dx, [array + bx]                ; load the current array element
+cmp dx, 10
+jb lessThanTen                      ; if dx < 10, jump to lessThanTen
+
+greaterOrEqualTen:
+mov [newArr + si], dx               ; place value at the end (si) of the newArr
+sub si, 2                           ; move index backward for next large value
+jmp continueLoop
+
+lessThanTen:
+mov [newArr + di], dx               ; place value at the beginning (di) of the newArr
+add di, 2                           ; move index forward for next small value
+
+continueLoop:
+add bx, 2                           ; move to the next element in the array
+loop l1                             ; repeat the loop until cx becomes 0
+
+mov ax, 3500                        ; set the destination address to 3500
+mov di, ax                          ; load 3500 into destination index
+
+mov si, 0                           ; reset si to copy newArr to 3500
+
+l2:
+mov dx, [newArr + si]               ; load partitioned value from newArr
+mov [di], dx                        ; store value at memory location 3500 + si
+add di, 2                           ; increment destination address
+add si, 2                           ; move to the next element in newArr
+cmp si, 20                          ; check if we've moved all 10 elements
+jne l2
+
+mov ax, 0x4c00                      ; terminate program
+int 0x21

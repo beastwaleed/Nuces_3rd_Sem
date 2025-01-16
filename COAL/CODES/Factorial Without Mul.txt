@@ -1,0 +1,34 @@
+org 0x0100
+
+jmp start
+data: dw 3
+result: dw 0
+
+start:
+
+	mov ax,[data]
+	mov bx, [data]
+	sub bx,1
+	mov cx,bx
+
+outerloop:
+	
+	mov dx,ax
+	mov si,bx
+	sub si,1
+	innerloop:
+	
+		add ax,dx
+		sub si,1
+		cmp si,0
+		jne innerloop
+
+	sub bx,1
+	sub cx,1
+	cmp cx,1
+	jne outerloop
+
+mov [result],ax
+
+mov ax, 0x4c00
+int 0x21

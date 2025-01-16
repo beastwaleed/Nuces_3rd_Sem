@@ -1,0 +1,25 @@
+org 0x0100
+
+jmp start
+data: dw 5
+result: dw 0
+
+start:
+mov dx,[data]
+mov bx, [data];
+sub bx,1;
+
+mov cx,bx;
+
+l1:
+
+imul dx, bx;
+sub bx,1
+sub cx,1
+cmp cx,0
+jnz l1
+
+mov [result],dx
+
+mov ax, 0x4c00
+int 0x21

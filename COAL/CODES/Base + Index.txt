@@ -1,0 +1,11 @@
+org 0x0100
+
+mov bx, num4    ; BX points to the base address of num4
+mov si, 2       ; SI is set to an offset of 2
+mov ax, 9ABCh   ; Move the value 9ABCh into AX
+mov [bx+si], ax ; Store AX (9ABCh) at address num4+2 (BX+SI)
+
+mov ax, 0x4c00
+int 0x21
+
+num4: dw 0, 0, 0, 0   ; Reserve four words for num4

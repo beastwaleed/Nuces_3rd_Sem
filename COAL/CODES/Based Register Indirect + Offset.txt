@@ -1,0 +1,10 @@
+org 0x0100
+
+mov bx, num2    ; BX points to the base address of num2
+mov ax, 5678h   ; Move the value 5678h into AX
+mov [bx+2], ax  ; Store AX (5678h) at num2+2 (offset by 2)
+
+mov ax, 0x4c00
+int 0x21
+
+num2: dw 0, 0   ; Reserve two words for num2

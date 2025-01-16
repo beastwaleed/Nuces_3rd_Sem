@@ -1,0 +1,47 @@
+org 0x100
+
+;carry flag
+;mov ax, 0FFFFH
+;add ax, 1
+
+;zero flag
+;mov ax, 0FFFFH
+;mov bx, 0FFFFH 
+;sub ax, bx
+
+;sign flag
+;mov ax, 10
+;mov bx, 20
+;sub ax,bx
+
+;overflow flag
+;mov ax, 127
+;add al, 1
+
+;auxiliary flag
+;mov ax, 1111B
+;mov bx, 0001B
+;add ax,bx
+
+;parity flag
+;mov ax, 0110B
+;mov bx, 0110B
+;add ax,bx
+
+;interrupt flag
+;cli
+;mov ax, 0111B
+;mov bx, 0110B
+;sti
+;mov ax, 0000B
+
+;direction flag
+;std
+;mov ax, 0010H
+;mov bx, 0110H
+;cld
+
+mov ax, FEFFH
+
+mov ax, 0x4c00
+int 0x21

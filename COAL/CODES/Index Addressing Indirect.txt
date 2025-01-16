@@ -1,0 +1,9 @@
+org 0x0100
+
+mov si, num1    ; Load the address of 'num1' into SI
+mov ax, [si]    ; Move the value at the address in SI (which points to num1) into AX
+
+mov ax, 0x4c00  ; Terminate the program
+int 0x21
+
+num1: dw 1234   ; Define a word value
